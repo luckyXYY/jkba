@@ -4,18 +4,18 @@ package com.example.administrator.bean;
  * Created by Administrator on 2017/6/29.
  */
 
-public class Question3 {
+public class Exam {
 
     /**
-     * id : 94
-     * question : 指示标线的作用是什么？
-     * answer : 2
-     * item1 : 禁止通行
-     * item2 : 指示通行
-     * item3 : 限制通行
-     * item4 : 警告提醒
-     * explains : 指示标线主要就是引导你正确的行驶，安全守法
-     * url :
+     * id : 57
+     * question : 这个标志是何含义？
+     * answer : 4
+     * item1 : 40米减速行驶路段
+     * item2 : 最低时速40公里
+     * item3 : 最高时速40公里
+     * item4 : 解除时速40公里限制
+     * explains : 解除时速40公里限制：表示限制速度路段结束。此标志设在限制车辆速度路段的重点。
+     * url : http://images.juheapi.com/jztk/c1c2subject1/57.jpg
      */
 
     private int id;

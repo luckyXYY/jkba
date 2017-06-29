@@ -1,21 +1,22 @@
 package com.example.administrator.bean;
 
 /**
- * Created by Administrator on 2017/6/29.
+ * Created by Administrator on 2017/6/28.
  */
 
-public class Qe {
+public class ExamInfo {
+
 
     /**
-     * id : 57
+     * id : 11
      * question : 这个标志是何含义？
-     * answer : 4
-     * item1 : 40米减速行驶路段
-     * item2 : 最低时速40公里
-     * item3 : 最高时速40公里
-     * item4 : 解除时速40公里限制
-     * explains : 解除时速40公里限制：表示限制速度路段结束。此标志设在限制车辆速度路段的重点。
-     * url : http://images.juheapi.com/jztk/c1c2subject1/57.jpg
+     * answer : 3
+     * item1 : 省道编号
+     * item2 : 国道编号
+     * item3 : 县道编号
+     * item4 : 乡道编号
+     * explains : 乡道是白底Y字开头的，县道是白底X开头的，省道是黄底的，国道是红底的。
+     * url : http://images.juheapi.com/jztk/c1c2subject1/11.jpg
      */
 
     private int id;

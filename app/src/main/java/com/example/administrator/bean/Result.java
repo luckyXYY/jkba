@@ -1,22 +1,21 @@
 package com.example.administrator.bean;
 
 /**
- * Created by Administrator on 2017/6/28.
+ * Created by Administrator on 2017/6/29.
  */
 
-public class Question {
-
+public class Result {
 
     /**
-     * id : 11
-     * question : 这个标志是何含义？
-     * answer : 3
-     * item1 : 省道编号
-     * item2 : 国道编号
-     * item3 : 县道编号
-     * item4 : 乡道编号
-     * explains : 乡道是白底Y字开头的，县道是白底X开头的，省道是黄底的，国道是红底的。
-     * url : http://images.juheapi.com/jztk/c1c2subject1/11.jpg
+     * id : 94
+     * question : 指示标线的作用是什么？
+     * answer : 2
+     * item1 : 禁止通行
+     * item2 : 指示通行
+     * item3 : 限制通行
+     * item4 : 警告提醒
+     * explains : 指示标线主要就是引导你正确的行驶，安全守法
+     * url :
      */
 
     private int id;
