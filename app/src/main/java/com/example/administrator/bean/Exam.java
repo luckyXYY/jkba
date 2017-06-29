@@ -28,6 +28,10 @@ public class Exam {
     private String explains;
     private String url;
 
+    private String userAnswer;
+
+
+
     public int getId() {
         return id;
     }
@@ -98,5 +102,9 @@ public class Exam {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public void setUserAnswer(String userAnswer) {
+        this.userAnswer = userAnswer;
     }
 }

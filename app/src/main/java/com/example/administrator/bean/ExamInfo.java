@@ -8,96 +8,53 @@ public class ExamInfo {
 
 
     /**
-     * id : 11
-     * question : 这个标志是何含义？
-     * answer : 3
-     * item1 : 省道编号
-     * item2 : 国道编号
-     * item3 : 县道编号
-     * item4 : 乡道编号
-     * explains : 乡道是白底Y字开头的，县道是白底X开头的，省道是黄底的，国道是红底的。
-     * url : http://images.juheapi.com/jztk/c1c2subject1/11.jpg
+     * subjectTitle : c1
+     * uid : 1
+     * limitTime : 10
+     * questionCount : 100
      */
 
-    private int id;
-    private String question;
-    private String answer;
-    private String item1;
-    private String item2;
-    private String item3;
-    private String item4;
-    private String explains;
-    private String url;
+    private String subjectTitle;
+    private int uid;
+    private int limitTime;
+    private int questionCount;
 
-    public int getId() {
-        return id;
+    public String getSubjectTitle() {
+        return subjectTitle;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setSubjectTitle(String subjectTitle) {
+        this.subjectTitle = subjectTitle;
     }
 
-    public String getQuestion() {
-        return question;
+    public int getUid() {
+        return uid;
     }
 
-    public void setQuestion(String question) {
-        this.question = question;
+    public void setUid(int uid) {
+        this.uid = uid;
     }
 
-    public String getAnswer() {
-        return answer;
+    public int getLimitTime() {
+        return limitTime;
     }
 
-    public void setAnswer(String answer) {
-        this.answer = answer;
+    public void setLimitTime(int limitTime) {
+        this.limitTime = limitTime;
     }
 
-    public String getItem1() {
-        return item1;
+    public int getQuestionCount() {
+        return questionCount;
     }
 
-    public void setItem1(String item1) {
-        this.item1 = item1;
+    public void setQuestionCount(int questionCount) {
+        this.questionCount = questionCount;
     }
 
-    public String getItem2() {
-        return item2;
-    }
-
-    public void setItem2(String item2) {
-        this.item2 = item2;
-    }
-
-    public String getItem3() {
-        return item3;
-    }
-
-    public void setItem3(String item3) {
-        this.item3 = item3;
-    }
-
-    public String getItem4() {
-        return item4;
-    }
-
-    public void setItem4(String item4) {
-        this.item4 = item4;
-    }
-
-    public String getExplains() {
-        return explains;
-    }
-
-    public void setExplains(String explains) {
-        this.explains = explains;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
+    @Override
+    public String toString() {
+        return "考试科目{" +subjectTitle + "\n" +
+                ", 考题数量=" + questionCount +"\n" +
+                ", 考试时间=" + limitTime + "分钟";
     }
 }
