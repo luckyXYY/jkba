@@ -6,4 +6,5 @@ package com.example.administrator.dao;
 
 public interface IExamDao {
     void loadExamInfo();
+    void loadQuestionLists();
 }
