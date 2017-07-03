@@ -9,7 +9,9 @@ import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.administrator.ExamApplication;
@@ -28,11 +30,16 @@ import java.util.List;
 
 public class ExamActivity extends AppCompatActivity {
 
-    TextView tvExamInfo,tvExamTitle,tvop1,tvop2,tvop3,tvop4;
+    TextView tvExamInfo,tvExamTitle,tvop1,tvop2,tvop3,tvop4,tvLoad;
+    LinearLayout layoutloading;
     ImageView mImageView;
     IExamBiz biz;
     boolean isLoadExamInfo=false;
     boolean isLoadQuesions=false;
+
+    boolean isLoadExamInfoReceiver=false;
+    boolean isLoadQuesionsReceiver=false;
+
     LoadExamBroadcast mLoadExamBroadcast;
     LoadQuestionBroadcast mLoadQuestionBroadcast;
     @Override
@@ -61,26 +68,33 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void initView() {
-
+       layoutloading=(LinearLayout) findViewById(R.id.layout_loading);
        tvExamInfo=(TextView) findViewById(R.id.tv_examinfo);
-       tvExamInfo=(TextView) findViewById(R.id.tv_exam_title);
-       tvExamInfo=(TextView) findViewById(R.id.tv_op1);
-       tvExamInfo=(TextView) findViewById(R.id.tv_op2);
-       tvExamInfo=(TextView) findViewById(R.id.tv_op3);
-       tvExamInfo=(TextView) findViewById(R.id.tv_op4);
+       tvExamTitle=(TextView) findViewById(R.id.tv_exam_title);
+       tvop1=(TextView) findViewById(R.id.tv_op1);
+       tvop2=(TextView) findViewById(R.id.tv_op2);
+       tvop3=(TextView) findViewById(R.id.tv_op3);
+       tvop4=(TextView) findViewById(R.id.tv_op4);
+       tvLoad=(TextView) findViewById(R.id.tv_load);
        mImageView=(ImageView) findViewById(R.id.tv_exam_image);
    }
 
     private void initData(){
-        if(isLoadExamInfo && isLoadQuesions) {
-            ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
-            //Log.e("hei","wentishi"+examInfo);
-            if (examInfo != null) {
-                showData(examInfo);
-            }
-            List<Exam> examList = ExamApplication.getInstance().getExamList();
-            if (examList != null) {
-                showExam(examList);
+        if(isLoadExamInfoReceiver && isLoadQuesionsReceiver) {
+            if (isLoadExamInfo && isLoadQuesions) {
+                layoutloading.setVisibility(View.GONE);
+                ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
+                //Log.e("hei","wentishi"+examInfo);
+                if (examInfo != null) {
+                    showData(examInfo);
+                }
+                List<Exam> examList = ExamApplication.getInstance().getExamList();
+                if (examList != null) {
+                    showExam(examList);
+                }
+            }else{
+                tvLoad.setText("下载失败，点击重新下载");
+
             }
         }
     }
@@ -116,11 +130,12 @@ public class ExamActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            boolean isSuccess=intent.getBooleanExtra(ExamApplication.LOAD_EXAM_QUESTION,false);
+            boolean isSuccess=intent.getBooleanExtra(ExamApplication.LOAD_DATA_SUCCESS,false);
             Log.e("LoadExamBroadcast","LoadExamBroadcast,isSuccess"+isSuccess);
             if(isSuccess){
                 isLoadExamInfo=true;
             }
+            isLoadExamInfoReceiver=true;
             initData();
         }
     }
@@ -128,11 +143,12 @@ public class ExamActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            boolean isSuccess=intent.getBooleanExtra(ExamApplication.LOAD_EXAM_QUESTION,false);
+            boolean isSuccess=intent.getBooleanExtra(ExamApplication.LOAD_DATA_SUCCESS,false);
             Log.e("LoadQuestionBroadcast","LoadQuestionBroadcast,isSuccess"+isSuccess);
             if(isSuccess){
                 isLoadQuesions=true;
             }
+            isLoadQuesionsReceiver=true;
             initData();
         }
     }
