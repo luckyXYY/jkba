@@ -1,4 +1,5 @@
 package com.example.administrator.biz;
+import com.example.administrator.bean.Exam;
 
 /**
  * Created by Administrator on 2017/7/3.
@@ -6,7 +7,9 @@ package com.example.administrator.biz;
 
 public interface IExamBiz {
     void beginExam();
-    void nextQuestion();
-    void preQuestion();
+    Exam getExam();
+    Exam nextQuestion();
+    Exam preQuestion();
     void commitExam();
+    String getExamIndex();
 }
