@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,7 +33,9 @@ import java.util.List;
 public class ExamActivity extends AppCompatActivity {
 
     TextView tvExamInfo,tvExamTitle,tvop1,tvop2,tvop3,tvop4,tvLoad,tvNo;
-    LinearLayout layoutloading;
+    CheckBox cb01,cb02,cb03,cb04;
+
+    LinearLayout layoutloading,layout03,layout04;
     ImageView mImageView;
     ProgressBar dialog;
     IExamBiz biz;
@@ -73,6 +76,8 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void initView() {
+       layout03=(LinearLayout) findViewById(R.id.layout_03);
+       layout04=(LinearLayout) findViewById(R.id.layout_04);
        layoutloading=(LinearLayout) findViewById(R.id.layout_loading);
        dialog =(ProgressBar) findViewById(R.id.load_dialog);
        tvExamInfo=(TextView) findViewById(R.id.tv_examinfo);
@@ -82,6 +87,10 @@ public class ExamActivity extends AppCompatActivity {
        tvop2=(TextView) findViewById(R.id.tv_op2);
        tvop3=(TextView) findViewById(R.id.tv_op3);
        tvop4=(TextView) findViewById(R.id.tv_op4);
+       cb01=(CheckBox)findViewById(R.id.cb_01);
+       cb02=(CheckBox)findViewById(R.id.cb_02);
+       cb03=(CheckBox)findViewById(R.id.cb_03);
+       cb04=(CheckBox)findViewById(R.id.cb_04);
        tvLoad=(TextView) findViewById(R.id.tv_load);
        mImageView=(ImageView) findViewById(R.id.tv_exam_image);
        layoutloading.setOnClickListener(new View.OnClickListener(){
@@ -120,6 +129,12 @@ public class ExamActivity extends AppCompatActivity {
             tvop2.setText(exam.getItem2());
             tvop3.setText(exam.getItem3());
             tvop4.setText(exam.getItem4());
+
+            layout03.setVisibility(exam.getItem3().equals("")?View.GONE:View.VISIBLE);
+            cb03.setVisibility(exam.getItem3().equals("")?View.GONE:View.VISIBLE);
+            layout04.setVisibility(exam.getItem4().equals("")?View.GONE:View.VISIBLE);
+            cb04.setVisibility(exam.getItem4().equals("")?View.GONE:View.VISIBLE);
+
             if(exam.getUrl()!=null &&  !exam.getUrl().equals("")){
                mImageView.setVisibility(View.VISIBLE);
                 Picasso.with(ExamActivity.this)
