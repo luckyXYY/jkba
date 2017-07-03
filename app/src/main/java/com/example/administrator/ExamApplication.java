@@ -7,6 +7,8 @@ import android.util.Log;
 import com.example.administrator.bean.Exam;
 import com.example.administrator.bean.ExamInfo;
 import com.example.administrator.bean.Result;
+import com.example.administrator.biz.ExamBiz;
+import com.example.administrator.biz.IExamBiz;
 import com.example.administrator.utils.OkHttpUtils;
 import com.example.administrator.utils.ResultUtils;
 
@@ -21,12 +23,14 @@ public class ExamApplication extends Application {
     ExamInfo mExamInfo;
     List<Exam> mExamList;
     private static ExamApplication instance;
+    IExamBiz biz;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        mExamInfo = new ExamInfo();
+        biz=new ExamBiz();
+      //  mExamInfo = new ExamInfo();
         initData();
     }
 
@@ -38,48 +42,7 @@ public class ExamApplication extends Application {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                OkHttpUtils<ExamInfo> utils=new OkHttpUtils<>(instance);
-                String uri="http://101.251.196.90:8080/JztkServer/examInfo";
-                utils.url(uri)
-                        .targetClass(ExamInfo.class)
-                        .execute(new OkHttpUtils.OnCompleteListener<ExamInfo>()
-                        {
-                            @Override
-                            public void onSuccess(ExamInfo result) {
-
-                                Log.e("main","result="+result);
-                                mExamInfo=result;
-                            }
-                            @Override
-                            public void onError(String error) {
-                                Log.e("main","error="+error);
-                            }
-                        });
-
-                OkHttpUtils<String> utils1=new OkHttpUtils<>(instance);
-                String url2="http://101.251.196.90:8080/JztkServer/getQuestions?testType=rand";
-                utils1.url(url2);
-                utils1.targetClass(String.class)
-                    .execute(new OkHttpUtils.OnCompleteListener<String>() {
-                        @Override
-                        public void onSuccess(String jsonStr) {
-                            Result result= ResultUtils.getListResultFromJson(jsonStr);
-                            if(result!=null && result.getError_code()==0){
-                                List<Exam> list=result.getResult();
-                                if(list!=null && list.size()>0){
-                                    mExamList=list;
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onError(String error) {
-                            Log.e("main","error="+error);
-
-                        }
-                    });
-
-
+                biz.beginExam();
             }
         }).start();
     }
