@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:gravity="center"
+
         android:orientation="vertical">
         <ProgressBar
             android:id="@+id/load_dialog"
@@ -42,6 +43,13 @@
         android:layout_height="1dp"
         android:background="#990000"
         android:layout_margin="5dp"/>
+    <TextView
+        android:id="@+id/tv_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="剩余时间：9分57秒"
+        android:textColor="#000"
+        android:gravity="center_horizontal"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,7 +69,8 @@
             android:layout_height="wrap_content"
             android:text="这个标志是何含义？"
             android:textColor="#000"
-            android:textSize="18sp"/>
+            android:textSize="18sp"
+            android:gravity="center_horizontal"/>
 
     </LinearLayout>
 
