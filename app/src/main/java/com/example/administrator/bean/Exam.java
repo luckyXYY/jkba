@@ -104,6 +104,10 @@ public class Exam {
         this.url = url;
     }
 
+    public String getUserAnswer() {
+        return userAnswer;
+    }
+
     public void setUserAnswer(String userAnswer) {
         this.userAnswer = userAnswer;
     }
