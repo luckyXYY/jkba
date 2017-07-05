@@ -8,6 +8,7 @@ import com.example.administrator.bean.Exam;
 public interface IExamBiz {
     void beginExam();
     Exam getExam();
+    Exam getExam(int index);
     Exam nextQuestion();
     Exam preQuestion();
     int commitExam();

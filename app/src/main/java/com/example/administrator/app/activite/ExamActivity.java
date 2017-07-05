@@ -14,6 +14,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Gallery;
@@ -175,11 +176,19 @@ public class ExamActivity extends AppCompatActivity {
     private void initGallery() {
         mAdapter=new QuestionAdapter(this);
         mGallery.setAdapter(mAdapter);
+        mGallery.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.e("gallery","gallery item position"+position);
+                saveUserAnswer();
+                showExam(biz.getExam(position));
+            }
+        });
     }
 
     private void initTime(ExamInfo examInfo) {
-       // int sumTime=examInfo.getLimitTime()*60*1000;
-        int sumTime=60*1000;
+        int sumTime=examInfo.getLimitTime()*60*1000;
+       // int sumTime=60*1000;
         Log.e("time","sumTime="+sumTime);
         final long overTime=sumTime+System.currentTimeMillis();
         Log.e("time","overTime="+overTime);
