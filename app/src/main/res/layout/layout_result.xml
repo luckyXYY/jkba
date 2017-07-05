@@ -10,8 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="你的分数是\n90分"
-        android:layout_gravity="center_horizontal"
+        android:layout_gravity="center_vertical"
         android:gravity="center"
+        android:layout_marginTop="52px"
         android:textSize="20sp"
         android:textColor="#000"/>
 
