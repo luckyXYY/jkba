@@ -41,14 +41,8 @@ import butterknife.OnClick;
  */
 
 public class ExamActivity extends AppCompatActivity {
-
-    TextView tvExamInfo, tvop1, tvop2, tvop3, tvop4, tvNo;
-
     CheckBox[] cbs = new CheckBox[4];
-    LinearLayout layoutloading;
-
-    ProgressBar dialog;
-    Gallery mGallery;
+    TextView[] tvOps=new TextView[4];
     IExamBiz biz;
     QuestionAdapter mAdapter;
     boolean isLoadExamInfo = false;
@@ -59,17 +53,17 @@ public class ExamActivity extends AppCompatActivity {
 
     LoadExamBroadcast mLoadExamBroadcast;
     LoadQuestionBroadcast mLoadQuestionBroadcast;
-    @BindView(R.id.load_dialog) ProgressBar loadDialog;
+    @BindView(R.id.load_dialog) ProgressBar dialog;
 
     @BindView(R.id.tv_load)TextView tvLoad;
 
     @BindView(R.id.layout_loading) LinearLayout layoutLoading;
 
-    @BindView(R.id.tv_examinfo)TextView tvExaminfo;
+    @BindView(R.id.tv_examinfo)TextView tvExamInfo;
 
     @BindView(R.id.tv_time)TextView tvTime;
 
-    @BindView(R.id.tv_exam_no) TextView mTvExamNo;
+    @BindView(R.id.tv_exam_no) TextView tvNo;
 
     @BindView(R.id.tv_exam_title)  TextView tvExamTitle;
 
@@ -95,7 +89,7 @@ public class ExamActivity extends AppCompatActivity {
 
     @BindView(R.id.cb_04) CheckBox cb04;
 
-    @BindView(R.id.gallery) Gallery gallery;
+    @BindView(R.id.gallery) Gallery mGallery;
 
     @BindView(R.id.btn_next) Button btnNext;
 
@@ -119,7 +113,7 @@ public class ExamActivity extends AppCompatActivity {
     }
 
     private void loadData() {
-        layoutloading.setEnabled(false);
+        layoutLoading.setEnabled(false);
         dialog.setVisibility(View.VISIBLE);
         tvLoad.setText("下载数据...");
         new Thread(new Runnable() {
@@ -151,6 +145,11 @@ public class ExamActivity extends AppCompatActivity {
         cbs[1] = cb02;
         cbs[2] = cb03;
         cbs[3] = cb04;
+        tvOps[0]=tvOp1;
+        tvOps[1]=tvOp2;
+        tvOps[2]=tvOp3;
+        tvOps[3]=tvOp4;
+
         //tvLoad = (TextView) findViewById(R.id.tv_load);
        // mImageView = (ImageView) findViewById(R.id.tv_exam_image);
       /*  layoutloading.setOnClickListener(
@@ -203,7 +202,7 @@ public class ExamActivity extends AppCompatActivity {
     private void initData() {
         if (isLoadExamInfoReceiver && isLoadQuesionsReceiver) {
             if (isLoadExamInfo && isLoadQuesions) {
-                layoutloading.setVisibility(View.GONE);
+                layoutLoading.setVisibility(View.GONE);
                 ExamInfo examInfo = ExamApplication.getInstance().getExamInfo();
                 //Log.e("hei","wentishi"+examInfo);
                 if (examInfo != null) {
@@ -215,7 +214,7 @@ public class ExamActivity extends AppCompatActivity {
 
                 // List<Exam> examList = ExamApplication.getInstance().getExamList();
             } else {
-                layoutloading.setEnabled(true);
+                layoutLoading.setEnabled(true);
                 dialog.setVisibility(View.GONE);
                 tvLoad.setText("下载失败，点击重新下载");
             }
@@ -275,10 +274,10 @@ public class ExamActivity extends AppCompatActivity {
         if (exam != null) {
             tvNo.setText(biz.getExamIndex());
             tvExamTitle.setText(exam.getQuestion());
-            tvop1.setText(exam.getItem1());
-            tvop2.setText(exam.getItem2());
-            tvop3.setText(exam.getItem3());
-            tvop4.setText(exam.getItem4());
+            tvOp1.setText(exam.getItem1());
+            tvOp2.setText(exam.getItem2());
+            tvOp3.setText(exam.getItem3());
+            tvOp4.setText(exam.getItem4());
             tvTime = (TextView) findViewById(R.id.tv_time);
 
             layout03.setVisibility(exam.getItem3().equals("") ? View.GONE : View.VISIBLE);
@@ -300,8 +299,34 @@ public class ExamActivity extends AppCompatActivity {
                 int userCB = Integer.parseInt(userAnswer) - 1;
                 cbs[userCB].setChecked(true);
                 setOptions(true);
+                setAnswerTextColor(userAnswer,exam.getAnswer());
             } else {
                 setOptions(false);
+                setOptionsColor();
+            }
+        }
+    }
+
+    private void setOptionsColor() {
+        for(TextView tvOp:tvOps){
+            tvOp.setTextColor(getResources().getColor(R.color.black));
+        }
+    }
+
+    private void setAnswerTextColor(String userAnswer, String answer) {
+        int ra=Integer.parseInt(answer)-1;
+        for(int i=0;i<tvOps.length;i++){
+            if(i==ra){
+                tvOps[i].setTextColor(getResources().getColor(R.color.green));
+            }else{
+                if(!userAnswer.equals(answer)) {
+                    int ua = Integer.parseInt(userAnswer) - 1;
+                    if (i == ua) {
+                        tvOps[i].setTextColor(getResources().getColor(R.color.red));
+                    } else {
+                        tvOps[i].setTextColor(getResources().getColor(R.color.black));
+                    }
+                }
             }
         }
     }
