@@ -6,6 +6,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.preference.DialogPreference;
+import android.preference.Preference;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -380,7 +382,20 @@ public class ExamActivity extends AppCompatActivity {
         showExam(biz.nextQuestion());
     }
 
-    public void commit(View view) {
+    public void commit(View view){
+        AlertDialog.Builder builder=new AlertDialog.Builder(this);
+        builder.setTitle("交卷")
+                .setMessage("你还有剩余时间，确认交卷么？")
+                .setPositiveButton("确认", new DialogInterface.OnClickListener(){
+                    @Override
+                    public void onClick(DialogInterface dialog,int which) {
+                       commit();
+                    }
+                })
+                .setNegativeButton("取消",null);
+        builder.create().show();
+    }
+    public void commit() {
         saveUserAnswer();
         int s = biz.commitExam();
         View inflate = View.inflate(this, R.layout.layout_result, null);
@@ -397,6 +412,7 @@ public class ExamActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+        builder.setCancelable(false);
         builder.create().show();
 
     }
