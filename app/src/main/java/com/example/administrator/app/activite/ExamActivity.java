@@ -321,11 +321,9 @@ public class ExamActivity extends AppCompatActivity {
             }else{
                 if(!userAnswer.equals(answer)) {
                     int ua = Integer.parseInt(userAnswer) - 1;
-                    if (i == ua) {
-                        tvOps[i].setTextColor(getResources().getColor(R.color.red));
-                    } else {
-                        tvOps[i].setTextColor(getResources().getColor(R.color.black));
-                    }
+                    tvOps[i].setTextColor(getResources().getColor(R.color.red));
+                }else {
+                    tvOps[i].setTextColor(getResources().getColor(R.color.black));
                 }
             }
         }
@@ -348,6 +346,7 @@ public class ExamActivity extends AppCompatActivity {
             if (cbs[i].isChecked()) {
 
                 biz.getExam().setUserAnswer(String.valueOf(i + 1));
+                setOptions(true);
                 mAdapter.notifyDataSetChanged();
                 return;
             }
